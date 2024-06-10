@@ -7,38 +7,20 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchEpisodes} from '../store/episodes/episodeActions';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import HomeIndex from '../pages/home';
+
+const Stack = createNativeStackNavigator();
 
 const routerIndex = () => {
-  const dispatch = useDispatch();
-  const {loading, episodes, error} = useSelector(state => state.episodes);
-
-  useEffect(() => {
-    dispatch(fetchEpisodes());
-  }, [dispatch]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
-  }
-
-  if (error) {
-    return <Text>Error: {error}</Text>;
-  }
-
   return (
-    <SafeAreaView>
-      <FlatList
-        data={episodes}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
-          <View>
-            <Text>{item.name}</Text>
-            <Text>{item.air_date}</Text>
-          </View>
-        )}
-      />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeIndex} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
