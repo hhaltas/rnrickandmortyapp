@@ -5,7 +5,7 @@ const characterSlice = createSlice({
   name: 'characters',
   initialState: {
     loading: false,
-    characters: [],
+    characters: '',
     error: '',
   },
   reducers: {},

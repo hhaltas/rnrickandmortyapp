@@ -2,17 +2,19 @@ import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {Colors} from '../utils/color';
 
-const CardItem = ({episodeName, date, episode}) => {
+const CardItem = ({name, date, episode, renderType}) => {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.itemPosition}>
-        <Text style={styles.episodeSeason}>{episode}</Text>
-
-        <Text style={styles.date}>{date}</Text>
+        <Text style={[styles.episodeSeason, {fontSize: name ? 16 : 20}]}>
+          {episode}
+        </Text>
+        <Text style={[styles.date, {fontSize: date ? 16 : 20}]}>{date}</Text>
       </View>
-
       <View>
-        <Text style={styles.episodeName}>{episodeName}</Text>
+        <Text style={[styles.episodeName, {fontSize: name ? 16 : 24}]}>
+          {name}
+        </Text>
       </View>
     </View>
   );
@@ -29,25 +31,30 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomColor: Colors.separator,
     borderBottomWidth: 1,
-    margin: 5,
+    marginTop: 10,
+    marginHorizontal: 15,
     borderRadius: 5,
+  },
+  itemContainerEpisode: {
+    flexDirection: 'column',
+    backgroundColor: Colors.secondaryBackground,
+    borderBottomColor: Colors.separator,
   },
   itemPosition: {
     flexDirection: 'row',
   },
   episodeName: {
     color: Colors.label,
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 10,
   },
   episodeSeason: {
     color: Colors.label,
-    fontSize: 20,
     marginLeft: 10,
     maxWidth: '50%',
   },
   date: {
-    color: Colors.inActive,
+    color: Colors.label,
     fontSize: 18,
     marginLeft: 'auto',
   },

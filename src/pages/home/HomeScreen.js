@@ -12,6 +12,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import CardItem from '../../components/CardItem';
 import {useNavigation} from '@react-navigation/native';
 import {fetchEpisodes} from '../../store/episodes/episodeActions';
+import ListItem from '../../components/ListItem';
+import {Colors} from '../../utils/color';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -29,32 +31,26 @@ const HomeScreen = () => {
       dispatch(fetchEpisodes(page));
     }
   };
+
+  const ListFC = () => {
+    return loading && page > 1 ? (
+      <ActivityIndicator size="large" color={Colors.separator} />
+    ) : null;
+  };
+
+  const goToEpisode = item => {
+    navigation.navigate('Episode', {episodeId: item});
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <ListItem
         data={episodes}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Episode', {episodeId: item.id})
-              }>
-              <CardItem
-                date={item.air_date}
-                episodeName={item.name}
-                episode={item.episode}
-              />
-            </TouchableOpacity>
-          );
-        }}
+        renderType={'episode'}
         onEndReached={loadMoreEpisodes}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={
-          loading && page > 1 ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : null
-        }
+        ListFooterComponent={ListFC}
+        goTo={goToEpisode}
       />
     </SafeAreaView>
   );

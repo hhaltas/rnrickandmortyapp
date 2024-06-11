@@ -13,19 +13,30 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 //Screen List
 import Home from '../pages/home/HomeScreen';
-import Favories from '../pages/favories/FavoriesScreen';
-import {fetchEpisodes} from '../store/episodes/episodeActions';
-import {useDispatch, useSelector} from 'react-redux';
 import EpisodeScreen from '../pages/episode/EpisodeScreen';
+import CharacterScreen from '../pages/character/CharacterScreen';
+import FavoriesScreen from '../pages/favories/FavoriesScreen';
+
 const Tab = createMaterialBottomTabNavigator();
+
 const Stack = createNativeStackNavigator();
 
 const routerIndex = () => {
   const HomeStack = () => {
     return (
-      <Stack.Navigator>
-        <Stack.Screen name="index" component={Home} />
+      <Stack.Navigator initialRouteName="Rick and Morty">
+        <Stack.Screen name="Rick and Morty" component={Home} />
         <Stack.Screen name="Episode" component={EpisodeScreen} />
+        <Stack.Screen name="Character" component={CharacterScreen} />
+      </Stack.Navigator>
+    );
+  };
+
+  const FavoriesStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Favories" component={FavoriesScreen} />
+        <Stack.Screen name="Character" component={CharacterScreen} />
       </Stack.Navigator>
     );
   };
@@ -40,7 +51,7 @@ const routerIndex = () => {
             let iconName;
             if (route.name === 'Home') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Favories') {
+            } else if (route.name === 'Favorite') {
               iconName = focused ? 'favorite' : 'favorite-border';
             }
 
@@ -53,7 +64,7 @@ const routerIndex = () => {
           inactiveTintColor: 'gray',
         }}>
         <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen name="Favories" component={Favories} />
+        <Tab.Screen name="Favorite" component={FavoriesStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
