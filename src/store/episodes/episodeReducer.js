@@ -6,7 +6,9 @@ const episodeSlice = createSlice({
   initialState: {
     loading: false,
     episodes: [],
+    page: 1,
     error: '',
+    hasNextPage: true,
   },
   reducers: {},
   extraReducers: builder => {
@@ -16,12 +18,13 @@ const episodeSlice = createSlice({
       })
       .addCase(fetchEpisodes.fulfilled, (state, action) => {
         state.loading = false;
-        state.episodes = action.payload;
+        state.episodes = [...state.episodes, ...action.payload.results];
+        state.page += 1;
+        state.hasNextPage = action.payload.info.next !== null;
         state.error = '';
       })
       .addCase(fetchEpisodes.rejected, (state, action) => {
         state.loading = false;
-        state.episodes = [];
         state.error = action.error.message;
       });
   },

@@ -21,21 +21,6 @@ const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const routerIndex = () => {
-  const dispatch = useDispatch();
-  const {loading, error} = useSelector(state => state.episodes);
-
-  useEffect(() => {
-    dispatch(fetchEpisodes());
-  }, [dispatch]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#388A3D" />;
-  }
-
-  if (error) {
-    return <Text>Error: {error}</Text>;
-  }
-
   const HomeStack = () => {
     return (
       <Stack.Navigator>

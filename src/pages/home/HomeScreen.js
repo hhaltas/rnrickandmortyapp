@@ -5,15 +5,30 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import CardItem from '../../components/CardItem';
 import {useNavigation} from '@react-navigation/native';
+import {fetchEpisodes} from '../../store/episodes/episodeActions';
 
 const HomeScreen = () => {
-  const {loading, episodes, error} = useSelector(state => state.episodes);
   const navigation = useNavigation();
+  const {loading, episodes, page, hasNextPage, error} = useSelector(
+    state => state.episodes,
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchEpisodes(page));
+  }, [dispatch]);
+
+  const loadMoreEpisodes = () => {
+    if (hasNextPage && !loading) {
+      dispatch(fetchEpisodes(page));
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -33,6 +48,13 @@ const HomeScreen = () => {
             </TouchableOpacity>
           );
         }}
+        onEndReached={loadMoreEpisodes}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          loading && page > 1 ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : null
+        }
       />
     </SafeAreaView>
   );
