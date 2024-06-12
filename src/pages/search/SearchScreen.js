@@ -18,6 +18,7 @@ import {
 } from '../../store/search/searchActions';
 import CardCharacterItem from '../../components/CardCharacterItem';
 import CardItem from '../../components/CardItem';
+import {Colors} from '../../utils/color';
 
 const SearchScreen = ({navigation}) => {
   const [query, setQuery] = useState('');
@@ -64,7 +65,21 @@ const SearchScreen = ({navigation}) => {
         value={query}
         onChangeText={setQuery}
       />
-      <Button title="Search" onPress={handleSearch} />
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          height: 40,
+          borderWidth: 0.33,
+          borderRadius: 5,
+          marginBottom: 10,
+          backgroundColor: Colors.separator,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={handleSearch}>
+        <Text style={{fontSize: 16, color: 'White'}}>Search</Text>
+      </TouchableOpacity>
+
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : error ? (
