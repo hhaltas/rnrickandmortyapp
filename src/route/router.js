@@ -16,6 +16,7 @@ import Home from '../pages/home/HomeScreen';
 import EpisodeScreen from '../pages/episode/EpisodeScreen';
 import CharacterScreen from '../pages/character/CharacterScreen';
 import FavoriesScreen from '../pages/favories/FavoriesScreen';
+import SearchScreen from '../pages/search/SearchScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -41,22 +42,32 @@ const routerIndex = () => {
     );
   };
 
+  const SearchStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Character" component={CharacterScreen} />
+        <Stack.Screen name="Episode" component={EpisodeScreen} />
+      </Stack.Navigator>
+    );
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
         barStyle={{backgroundColor: '#388A3D'}}
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({color, size}) => {
             let iconName;
             if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
+              iconName = 'home';
             } else if (route.name === 'Favorite') {
-              iconName = focused ? 'favorite' : 'favorite-border';
+              iconName = 'favorite';
+            } else if (route.name === 'Search') {
+              iconName = 'search';
             }
-
-            // You can return any component that you like here!
-            return <MaterialIcons name={iconName} size={size} color={color} />;
+            return <MaterialIcons name={iconName} size={30} color={color} />;
           },
         })}
         tabBarOptions={{
@@ -64,6 +75,7 @@ const routerIndex = () => {
           inactiveTintColor: 'gray',
         }}>
         <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Search" component={SearchStack} />
         <Tab.Screen name="Favorite" component={FavoriesStack} />
       </Tab.Navigator>
     </NavigationContainer>

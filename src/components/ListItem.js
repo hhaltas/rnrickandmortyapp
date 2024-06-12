@@ -26,7 +26,6 @@ const ListItem = ({
           date={item.item.air_date}
           name={item.item.name}
           episode={item.item.episode}
-          renderType={renderType}
         />
       </TouchableOpacity>
     );
@@ -37,7 +36,6 @@ const ListItem = ({
       style={styles.characterContainer}
       disabled={true}
       onPress={() => {
-        console.log('renderCharacterItem', item);
         // goTo(item.id);
       }}>
       <CardItem name={item} renderType="character" />

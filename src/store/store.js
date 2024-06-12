@@ -4,6 +4,7 @@ import episodeReducer from '../store/episodes/episodeReducer';
 import characterReducer from './characters/characterReducer';
 import episodeDetailReducer from './episodeDetail/episodeDetailReducer';
 import favoriteReducer from './favorite/favoriteReducer';
+import searchReducer from './search/searchReducer';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     characters: characterReducer,
     episodesDetails: episodeDetailReducer,
     favorite: favoriteReducer,
+    search: searchReducer,
   },
 });
 

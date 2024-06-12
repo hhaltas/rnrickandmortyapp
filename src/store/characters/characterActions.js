@@ -7,7 +7,6 @@ export const fetchCharacters = createAsyncThunk(
   'characters/fetchCharacters',
   async characterId => {
     const response = await axios.get(ApiUrl + ApiCharacter + '/' + characterId);
-    console.log('fetchCharacters', response.data);
     return response.data;
   },
 );

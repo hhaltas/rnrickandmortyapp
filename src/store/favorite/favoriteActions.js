@@ -13,7 +13,6 @@ export const loadFavoritesFromStorage = createAsyncThunk(
       }
       return [];
     } catch (error) {
-      console.error('Error loading favorites from storage:', error);
       return [];
     }
   },
@@ -25,8 +24,6 @@ export const saveFavoritesToStorage = createAsyncThunk(
     try {
       const favoritesJson = JSON.stringify(favorites);
       await AsyncStorage.setItem('favorites', favoritesJson);
-    } catch (error) {
-      console.error('Error saving favorites to storage:', error);
-    }
+    } catch (error) {}
   },
 );

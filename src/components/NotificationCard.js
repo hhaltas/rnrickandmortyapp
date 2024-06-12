@@ -11,8 +11,6 @@ const NotificationCard = ({
   handleRemoveData,
   characters,
 }) => {
-  console.log('modalcard', visibleModal);
-
   return (
     <Modal visible={visibleModal} onTouchOutside={visibleModal.onTouchOutside}>
       <ModalContent>

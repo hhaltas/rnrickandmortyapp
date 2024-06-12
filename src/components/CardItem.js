@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.separator,
     borderBottomWidth: 1,
     marginTop: 10,
-    marginHorizontal: 15,
     borderRadius: 5,
   },
   itemContainerEpisode: {

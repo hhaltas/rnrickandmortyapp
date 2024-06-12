@@ -37,7 +37,6 @@ const EpisodeScreen = ({route}) => {
   const renderCharacter = true;
 
   useEffect(() => {
-    console.log('route', route?.params?.episodeId);
     dispatch(fetchEpisodeDetail(route?.params?.episodeId));
   }, [dispatch]);
 
@@ -46,7 +45,6 @@ const EpisodeScreen = ({route}) => {
       if (episodesDetails) {
         const characterData = await Promise.all(
           episodesDetails.characters.map(async url => {
-            console.log('fetcchar', url);
             const response = await axios.get(url);
             return response.data;
           }),
